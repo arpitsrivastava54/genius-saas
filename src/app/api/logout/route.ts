@@ -9,8 +9,7 @@ export async function GET(request: NextRequest) {
    { success: true, msg: "Logout Successful" },
    { status: 200 }
   );
-  response.cookies.delete("authToken");
-  response.headers.set("cache-control", "no-cache");
+  response.cookies.set("authToken","",{httpOnly:true});
   return response;
 
  } catch (error: any) {
