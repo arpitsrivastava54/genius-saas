@@ -22,9 +22,9 @@ export const sendGptMessage = async (message: string) => {
  };
 
  try {
-  const freeCountResp = await updateFreeCount();
+  // const freeCountResp = await updateFreeCount();
 
-  if (!freeCountResp.success) return freeCountResp;
+  // if (!freeCountResp.success) return freeCountResp;
 
   const resp = (await axios.request(options)).data.choices[0].message.content;
   return { success: true, data: resp };
@@ -76,9 +76,9 @@ export const generateCode = async (prompt: string) => {
  };
 
  try {
-  const freeCountResp = await updateFreeCount();
+  // const freeCountResp = await updateFreeCount();
 
-  if (!freeCountResp.success) return freeCountResp;
+  // if (!freeCountResp.success) return freeCountResp;
 
   const response = await axios.request(options);
   return { success: true, code: response.data.text };
