@@ -35,7 +35,7 @@ const SignUpForm = () => {
         })
         router.push("/sign-in");
     } catch (error: any) {
-      toast.error(error.response.data.msg, {
+      toast.error(error.response.data.msg || "Something went wrong please try again !", {
         id: toastId
       })
     } finally {

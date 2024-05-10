@@ -24,8 +24,8 @@ const UserButton = () => {
     const toastId = toast.loading("Please wait...")
     try {
       const res = (await axios.get("/api/logout")).data as ApiResponseType
+      router.replace("/")
       toast.success(res.msg, { id: toastId })
-      router.push("/")
     } catch (error: any) {
       toast.success(error.response.data.msg, { id: toastId })
     } finally {

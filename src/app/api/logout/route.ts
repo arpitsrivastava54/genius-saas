@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { dbConnect } from "@/lib/dbConnection";
 
 export async function GET(request: NextRequest) {
  try {
