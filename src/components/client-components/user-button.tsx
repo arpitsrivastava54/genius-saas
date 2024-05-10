@@ -27,7 +27,7 @@ const UserButton = () => {
       router.replace("/")
       toast.success(res.msg, { id: toastId })
     } catch (error: any) {
-      toast.success(error.response.data.msg, { id: toastId })
+      toast.error(error.response.data.msg, { id: toastId })
     } finally {
       setIsSubmitting(false)
     }

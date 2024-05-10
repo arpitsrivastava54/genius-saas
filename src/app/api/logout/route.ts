@@ -1,14 +1,15 @@
+import { revalidateTag } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
 
 export async function GET(request: NextRequest) {
  try {
+
   const response =  NextResponse.json(
    { success: true, msg: "Logout Successful" },
-   { status: 200 }
+   { status: 200 ,headers: { "Cache-Control": "no-cache" }}
   );
   response.cookies.delete("authToken");
-
   return response;
 
  } catch (error: any) {
