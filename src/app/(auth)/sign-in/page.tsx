@@ -28,10 +28,11 @@ const SignInPage = () => {
         <Button variant={'gradient'} className='w-full flex gap-4'>
           <LinkIcon className='w-4 h-4 ' />Sign in with Google
         </Button>
-        <Link className='hover:underline hover:text-blue-700 text-xs text-blue-600' href={"/sign-up"}>Don't Have an Account ? Sign Up</Link>
+        <Link className='hover:underline hover:text-blue-700 text-xs text-blue-600' href={"/sign-up"}>Don&apos;t Have an Account ? Sign Up</Link>
       </CardFooter>
     </Card>
   )
 }
 
 export default SignInPage
+
