@@ -7,9 +7,10 @@ export async function GET(request: NextRequest) {
 
   const response =  NextResponse.json(
    { success: true, msg: "Logout Successful" },
-   { status: 200 ,headers: { "Cache-Control": "no-cache" }}
+   { status: 200 }
   );
   response.cookies.delete("authToken");
+  response.headers.set("cache-control", "no-cache");
   return response;
 
  } catch (error: any) {
