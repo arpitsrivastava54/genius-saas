@@ -11,7 +11,7 @@ export async function middleware(request: NextRequest) {
  if (!token && !isPublicPath) {
   return NextResponse.redirect(new URL("/sign-in", request.url));
  }
- 
+
  if (token && isPublicPath) {
   return NextResponse.redirect(new URL("/dashboard", request.url));
  }
@@ -20,5 +20,14 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
- matcher: ["/", "/sign-in", "/sign-up", "/dashboard"],
+ matcher: [
+  "/",
+  "/sign-in",
+  "/sign-up",
+  "/dashboard",
+  "/conversation",
+  "/code",
+  "/image",
+  "/settings",
+ ],
 };

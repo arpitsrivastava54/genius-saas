@@ -1,6 +1,6 @@
 "use client";
 
-import { Code, Image as ImageIcon, LayoutDashboard, MessageSquareText, Music, Settings, Video, Zap } from "lucide-react";
+import { Code, Image as ImageIcon, LayoutDashboard, MessageSquareText, Settings, Zap } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { useFreeTrialContext } from "@/context/FreeTrialContext";
 import { Button } from "./ui/button";
 
 const navItems = [
@@ -27,16 +28,6 @@ const navItems = [
     icon: <ImageIcon className="w-5 h-5 text-amber-500" />,
     href: "/image"
   },
-  // {
-  //   name: "Video Generation",
-  //   icon: <Video className="w-5 h-5 text-green-500" />,
-  //   href: "/video"
-  // },
-  // {
-  //   name: "Music Generation",
-  //   icon: <Music className="w-5 h-5 text-orange-500" />,
-  //   href: "/music"
-  // },
   {
     name: "Code Generation",
     icon: <Code className="w-5 h-5 text-blue-300" />,
@@ -51,6 +42,8 @@ const navItems = [
 
 export const SideBar = () => {
   const pathname = usePathname();
+  const { freeTrialCount } = useFreeTrialContext()
+
   return (
     <div className="flex h-full flex-col justify-between">
       <div>
@@ -72,9 +65,9 @@ export const SideBar = () => {
 
 
       <Card className="mb-10 p-3 flex flex-col gap-4 items-center w-[90%] mx-auto bg-slate-700 border-none">
-          <p className="text-white font-semibold text-xs">0/5 Free Generation</p>
-          <Progress value={90} className="h-[9px]"/>
-          <Button variant={"gradient"} className="w-full m-0 flex justify-center items-center gap-3">Upgrade <Zap className="w-4 h-4" fill="white"/></Button>
+        <p className="text-white font-semibold text-xs">{freeTrialCount}/5 Free Generation</p>
+        <Progress value={freeTrialCount * 20} className="h-[9px]" />
+        <Button variant={"gradient"} className="w-full m-0 flex justify-center items-center gap-3">Upgrade <Zap className="w-4 h-4" fill="white" /></Button>
       </Card>
     </div>
   )

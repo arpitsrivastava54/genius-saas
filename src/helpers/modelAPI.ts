@@ -22,10 +22,6 @@ export const sendGptMessage = async (message: string) => {
  };
 
  try {
-  // const freeCountResp = await updateFreeCount();
-
-  // if (!freeCountResp.success) return freeCountResp;
-
   const resp = (await axios.request(options)).data.choices[0].message.content;
   return { success: true, data: resp };
   
@@ -88,13 +84,3 @@ export const generateCode = async (prompt: string) => {
   return { success: false, code: null };
  }
 };
-
-async function updateFreeCount() {
- const freeCountResp = (await axios.get("/api/update-free-trial-count"))
-  .data as ApiResponseType;
- if (!freeCountResp.success) {
-  await axios.get("/logout");
-  return { success: false, msg: "token Expires" };
- }
- return { success: true, msg: freeCountResp.msg };
-}
