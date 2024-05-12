@@ -10,6 +10,7 @@ const nextConfig = {
    },
   ],
  },
+
  headers: async () => {
   return [
    {
@@ -30,6 +31,16 @@ const nextConfig = {
      },
     ],
    },
+  //  {
+  //   source: "/",
+  //   headers: [
+  //    {
+  //     key: "Content-Security-Policy",
+  //     value:
+  //      "default-src 'self'; script-src 'self' https://example.com; style-src 'self' https://example.com; img-src 'self' https://example.com; font-src 'self' https://example.com; object-src 'none'; frame-ancestors 'none';",
+  //    },
+  //   ],
+  //  },
   ];
  },
 };

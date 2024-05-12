@@ -3,6 +3,29 @@ import Typewriter from "@/components/ui/typewriter";
 import Image from "next/image";
 import Link from "next/link";
 
+const feedbacks = [
+  {
+    "name": "Kiran Kumar",
+    "feedback": "I'm amazed by the versatility of this AI platform. From having insightful conversations to generating stunning images, it's a game-changer!",
+    "img":"/user-1.jpg"
+  },
+  {
+    "name": "Divya Singh",
+    "feedback": "Using this AI platform has been a breeze. The conversation AI feels so human-like, and the image generation capabilities are simply impressive.",
+    "img":"/user-2.jpg"
+  },
+  {
+    "name": "Amit Gupta",
+    "feedback": "I've tried several AI platforms, but none compare to this one. The quality of generated content, whether text or images, is top-notch.",
+    "img":"/user-3.jpg"
+  },
+  {
+    "name": "Ananya Sharma",
+    "feedback": "This AI platform has streamlined my workflow. I can effortlessly generate creative content and engage in meaningful conversations, all in one place.",
+    "img":"/user-4.jpg"
+  }
+]
+
 export default function Home() {
   return (
     <main className="bg-[#0a0b38] w-full text-white" >
@@ -21,7 +44,7 @@ export default function Home() {
       <section className="flex flex-col h-[50vh] justify-center gap-10 items-center my-10 w-full">
         <h1 className="text-4xl md:text-6xl font-semibold">The Best AI Tool for</h1>
         <h2 className="my-5 h-[2rem] text-fuchsia-600 text-3xl md:text-5xl font-bold">
-          <Typewriter data={["ChatBot", "Image Generation", "Code Generation", "Video Generation"]} />
+          <Typewriter data={["ChatBot", "Image Generation", "Code Generation"]} />
         </h2>
         <div className="flex-col items-center flex gap-5">
           <p className="hover:text-muted-foreground">Create content using AI 10x faster.</p>
@@ -34,14 +57,14 @@ export default function Home() {
         <h1 className="text-center text-2xl md:text-4xl font-semibold my-10">Testimonials</h1>
         <div className="flex gap-2 flex-wrap justify-center my-10">
           {
-            Array.from({ length: 8 }).map((_, i) => (
+            feedbacks.map((feed, i) => (
               <div key={i} className="w-[80%] md:w-[24%] p-2 flex gap-3 rounded-lg bg-[#0e1f4e] hover:bg-[#0e1f4e52] cursor-pointer">
-                <div className="w-[20%] my-3">
-                  <Image src={"/user-1.jpg"} alt="" width={100} height={100} className="rounded-full" />
+                <div className="my-3">
+                  <Image src={feed.img} alt="" width={150} height={10} className="rounded-full" />
                 </div>
                 <div>
-                  <h2 className="font-semibold my-1">Name</h2>
-                  <p className="text-sm">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Enim nihil maxime</p>
+                  <h2 className="font-semibold my-1">{feed.name}</h2>
+                  <p className="text-sm">{feed.feedback}</p>
                 </div>
               </div>
             ))

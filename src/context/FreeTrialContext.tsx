@@ -7,11 +7,13 @@ import toast from "react-hot-toast";
 interface FreeTrialContextType {
   freeTrialCount: number
   fetchFreeTrialCount: () => Promise<void>
+  isPro: boolean;
 }
 
 const FreeTrialContext = createContext<FreeTrialContextType>({
   freeTrialCount: 0,
-  fetchFreeTrialCount: async () => {}
+  fetchFreeTrialCount: async () => {},
+  isPro:false
 });
 
 export default function FreeTrialContextProvider ({children}:{
@@ -20,14 +22,27 @@ export default function FreeTrialContextProvider ({children}:{
   
   const router = useRouter();
   const [freeTrialCount, setFreeTrialCount] = useState(0);
+  const [isPro, setIsPro] = useState(false);
+  
 
   const fetchFreeTrialCount = async () => {
     try {
-      const resp = await axios.get('/api/free-trial-count');
-      setFreeTrialCount(resp.data.data);
+
+      if(isPro) return;
+
+      const resp = (await axios.get('/api/free-trial-count')).data as ApiResponseType;
+      if(resp.msg == "PRO") {
+        setIsPro(true)
+        return;
+      }
+
+      setFreeTrialCount(resp.data);
     } catch (error:any) {
-      toast.error(error.response.data.msg)
-      router.refresh();
+      if(error.response.status == 401) {
+        toast.error(error.response.data.msg)
+        await axios.get("/api/logout");
+        router.refresh();
+      }
     }
   }
 
@@ -36,7 +51,7 @@ export default function FreeTrialContextProvider ({children}:{
   },[])
 
   return (
-    <FreeTrialContext.Provider value={{freeTrialCount,fetchFreeTrialCount}}>
+    <FreeTrialContext.Provider value={{freeTrialCount,fetchFreeTrialCount,isPro}}>
       {children}
     </FreeTrialContext.Provider>
   );

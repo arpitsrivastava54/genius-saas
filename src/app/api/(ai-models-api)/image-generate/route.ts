@@ -1,5 +1,5 @@
 import { getDatafromToken } from "@/helpers/getDataFromToken";
-import { sendGptMessage } from "@/helpers/modelAPI";
+import { generateImage, sendGptMessage } from "@/helpers/modelAPI";
 import { dbConnect } from "@/lib/dbConnection";
 import UserModel from "@/models/user";
 import { NextRequest, NextResponse } from "next/server";
@@ -33,22 +33,24 @@ export async function POST(request: NextRequest) {
   const user = await UserModel.findById({ _id: decodedToken?.id });
   if (!user) throw new Error("Session Time out Please Login Again");
 
-  if (user.freeUseCount == 5)
+  if (!user.isPro && user.freeUseCount == 5)
    throw new Error("Free Trial Over Please Upgrade Your Plan !");
 
-  const resp = await sendGptMessage(message);
+  const resp = await generateImage(message);
   if (!resp.success) throw new Error("Something Went Wrong Please try again !");
 
-  user.freeUseCount = user.freeUseCount + 1;
-  await user.save();
+  if (!user.isPro){
+    user.freeUseCount = user.freeUseCount + 1;
+    await user.save();
+  }
 
   return NextResponse.json(
-   { success: true, msg: "Message received", data: resp.data },
+   { success: true, msg: "Message received", data: resp.url },
    { status: 200 }
   );
  } catch (error: any) {
   return NextResponse.json(
-   { success: false, msg: error.message || "No message found" },
+   { success: false, msg: error.message || "No Image found" },
    { status: 403 }
   );
  }

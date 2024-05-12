@@ -1,10 +1,10 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { User } from "lucide-react";
-import toast from "react-hot-toast";
-import { useEffect, useState } from "react";
 import axios from "axios";
+import { User } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 import {
   DropdownMenu,
@@ -35,7 +35,7 @@ const UserButton = () => {
   }
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger asChild className="cursor-pointer">
         <span className='p-2 m-2 bg-purple-600 rounded-full text-white'><User className='w-6 h-6' /></span>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="me-2">

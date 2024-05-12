@@ -25,14 +25,16 @@ export async function GET(request: NextRequest) {
 
   if (!user) throw new Error("Invalid Token Please Login Again");
 
+  if(user.isPro) return NextResponse.json({ success: true, msg: "PRO"}, { status: 200 });
+
   return NextResponse.json(
-   { success: true, msg: user.freeUseCount, data: user.freeUseCount },
+   { success: true, msg: "FREE", data: user.freeUseCount },
    { status: 200 }
   );
  } catch (error: any) {
   return NextResponse.json(
    { success: false, msg: error.message || "Token Expires" },
-   { status: 400 }
+   { status: 401 }
   );
  }
 }

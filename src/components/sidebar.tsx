@@ -1,15 +1,16 @@
 "use client";
 
-import { Code, Image as ImageIcon, LayoutDashboard, MessageSquareText, Settings, Zap } from "lucide-react";
+import { Code, Crown, Image as ImageIcon, LayoutDashboard, MessageSquareText, Settings, Zap } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 
-import { Card } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
+import { UpgradeButton } from "@/components/client-components/upgrade-button";
 import { useFreeTrialContext } from "@/context/FreeTrialContext";
+import { Progress } from "@/components/ui/progress";
+import { Card } from "@/components/ui/card";
 import { Button } from "./ui/button";
 
 const navItems = [
@@ -33,16 +34,16 @@ const navItems = [
     icon: <Code className="w-5 h-5 text-blue-300" />,
     href: "/code"
   },
-  {
-    name: "Settings",
-    icon: <Settings className="w-5 h-5 text-white" />,
-    href: "/settings"
-  },
+  // {
+  //   name: "Settings",
+  //   icon: <Settings className="w-5 h-5 text-white" />,
+  //   href: "/settings"
+  // },
 ]
 
 export const SideBar = () => {
   const pathname = usePathname();
-  const { freeTrialCount } = useFreeTrialContext()
+  const { freeTrialCount, isPro } = useFreeTrialContext()
 
   return (
     <div className="flex h-full flex-col justify-between">
@@ -63,12 +64,21 @@ export const SideBar = () => {
         </nav>
       </div>
 
-
-      <Card className="mb-10 p-3 flex flex-col gap-4 items-center w-[90%] mx-auto bg-slate-700 border-none">
-        <p className="text-white font-semibold text-xs">{freeTrialCount}/5 Free Generation</p>
-        <Progress value={freeTrialCount * 20} className="h-[9px]" />
-        <Button variant={"gradient"} className="w-full m-0 flex justify-center items-center gap-3">Upgrade <Zap className="w-4 h-4" fill="white" /></Button>
-      </Card>
+      {
+        !isPro && <Card className="mb-10 p-3 flex flex-col gap-4 items-center w-[90%] mx-auto bg-slate-700 border-none">
+          <p className="text-white font-semibold text-xs">{freeTrialCount}/5 Free Generation</p>
+          <Progress value={freeTrialCount * 20} className="h-[9px]" />
+          <UpgradeButton />
+        </Card>
+      }
+      {
+        isPro &&
+        <Card className="mb-10 p-3 flex flex-col gap-4 items-center w-[90%] mx-auto bg-slate-700 border-none">
+          <Button disabled variant={"gradient"} className="w-full m-0 flex justify-center items-center gap-3">
+            Pro Plan <Crown className="w-5 h-5" fill="yellow" />
+          </Button>
+        </Card>
+      }
     </div>
   )
 }

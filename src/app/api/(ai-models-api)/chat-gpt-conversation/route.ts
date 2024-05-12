@@ -1,5 +1,5 @@
 import { getDatafromToken } from "@/helpers/getDataFromToken";
-import { generateCode, sendGptMessage } from "@/helpers/modelAPI";
+import { sendGptMessage } from "@/helpers/modelAPI";
 import { dbConnect } from "@/lib/dbConnection";
 import UserModel from "@/models/user";
 import { NextRequest, NextResponse } from "next/server";
@@ -33,17 +33,20 @@ export async function POST(request: NextRequest) {
   const user = await UserModel.findById({ _id: decodedToken?.id });
   if (!user) throw new Error("Session Time out Please Login Again");
 
-  if (user.freeUseCount == 5)
+
+  if (!user.isPro && user.freeUseCount == 5)
    throw new Error("Free Trial Over Please Upgrade Your Plan !");
 
-  const resp = await generateCode(message);
+  const resp = await sendGptMessage(message);
   if (!resp.success) throw new Error("Something Went Wrong Please try again !");
 
-  user.freeUseCount = user.freeUseCount + 1;
-  await user.save();
+  if (!user.isPro){
+    user.freeUseCount = user.freeUseCount + 1;
+    await user.save();
+  }
 
   return NextResponse.json(
-   { success: true, msg: "Message received", data: resp.code },
+   { success: true, msg: "Message received", data: resp.data },
    { status: 200 }
   );
  } catch (error: any) {
