@@ -16,7 +16,7 @@ interface Props {
 const layout = ({ children }: Props) => {
   return (
     <FreeTrialContextProvider>
-      <div className='flex h-full'>
+      <div className='flex min-h-full'>
         <aside className='bg-mainBgColor hidden lg:block text-white w-[350px]'>
           <SideBar />
         </aside>

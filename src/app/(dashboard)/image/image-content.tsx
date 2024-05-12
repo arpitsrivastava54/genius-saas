@@ -59,7 +59,7 @@ export const ImageContent = () => {
           name='msg'
           type="text"
           className="h-[50px]"
-          placeholder="Create a function in Javascript of adding two numbers !"
+          placeholder="Give me a prompt to generate an image!"
         />
         <Button disabled={loading} type='submit' className="bg-violet-700">Generate</Button>
       </form>

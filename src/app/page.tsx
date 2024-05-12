@@ -5,22 +5,22 @@ import Link from "next/link";
 
 const feedbacks = [
   {
-    "name": "Kiran Kumar",
+    "name": "Radhika Chauhan",
     "feedback": "I'm amazed by the versatility of this AI platform. From having insightful conversations to generating stunning images, it's a game-changer!",
     "img":"/user-1.jpg"
   },
   {
-    "name": "Divya Singh",
+    "name": "Rohit Agarwal",
     "feedback": "Using this AI platform has been a breeze. The conversation AI feels so human-like, and the image generation capabilities are simply impressive.",
     "img":"/user-2.jpg"
   },
   {
-    "name": "Amit Gupta",
+    "name": "Kirti Srivastava",
     "feedback": "I've tried several AI platforms, but none compare to this one. The quality of generated content, whether text or images, is top-notch.",
     "img":"/user-3.jpg"
   },
   {
-    "name": "Ananya Sharma",
+    "name": "Shubham Singh",
     "feedback": "This AI platform has streamlined my workflow. I can effortlessly generate creative content and engage in meaningful conversations, all in one place.",
     "img":"/user-4.jpg"
   }
@@ -29,19 +29,19 @@ const feedbacks = [
 export default function Home() {
   return (
     <main className="bg-[#0a0b38] w-full text-white" >
-      <header className="flex justify-between p-5">
+      <header className="flex justify-between p-7">
         <div className="logo flex items-center gap-2">
           <span className="">
-            <Image alt="logo" src={"/logo.webp"} width={30} height={30} />
+            <Image alt="logo" src={"/logo.webp"} width={40} height={40} />
           </span>
-          <span className="text-base md:text-xl font-semibold">Genius</span>
+          <span className="text-base md:text-2xl font-semibold">Genius</span>
         </div>
         <div className="btn">
           <Link href={"/sign-in"} className="bg-white text-black px-3 py-2 rounded-full hover:bg-muted-foreground hover:text-white font-semibold transition-all duration-500 text-sm">Get Started</Link>
         </div>
       </header>
 
-      <section className="flex flex-col h-[50vh] justify-center gap-10 items-center my-10 w-full">
+      <section className="flex flex-col min-h-[50vh] justify-center gap-10 items-center my-5 w-full">
         <h1 className="text-4xl md:text-6xl font-semibold">The Best AI Tool for</h1>
         <h2 className="my-5 h-[2rem] text-fuchsia-600 text-3xl md:text-5xl font-bold">
           <Typewriter data={["ChatBot", "Image Generation", "Code Generation"]} />
@@ -64,7 +64,7 @@ export default function Home() {
                 </div>
                 <div>
                   <h2 className="font-semibold my-1">{feed.name}</h2>
-                  <p className="text-sm">{feed.feedback}</p>
+                  <p className="text-sm text-slate-300">{feed.feedback}</p>
                 </div>
               </div>
             ))
@@ -72,7 +72,7 @@ export default function Home() {
         </div>
       </section>
       <footer className="mt-5 text-center py-5 bg-[#0e1f4e] text-sm md:text-base">
-        All rights reserved and developed by Arpit Srivastava | &copy; Copyright 2024
+        All rights reserved and developed by <Link href={"https://arpitsrivastava.vercel.app"} className="underline text-orange-300" target="_blank">Arpit Srivastava</Link> | &copy; Copyright 2024
       </footer>
     </main>
   );
