@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
     payment_method_types: ['card'],
     line_items: lineItems,
     mode: 'payment',
-    success_url: 'https://monkeycloth.vercel.app/success-payment?session_id=fsdfsdfsdj45465461231fsdjfdskfj',
+    success_url: 'https://monkeycloth.vercel.app/success-payment/reuifudsfakerj234fjsdkafdsufdsyfsfdkfl',
     cancel_url: 'https://monkeycloth.vercel.app/',
   });
 
