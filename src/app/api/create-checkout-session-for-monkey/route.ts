@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
     payment_method_types: ['card'],
     line_items: lineItems,
     mode: 'payment',
-    success_url: 'https://monkeycloth.vercel.app/',
+    success_url: 'https://monkeycloth.vercel.app/success-payment?session_id=fsdfsdfsdj45465461231fsdjfdskfj',
     cancel_url: 'https://monkeycloth.vercel.app/',
   });
 
@@ -34,6 +34,7 @@ export async function POST(request: NextRequest) {
    { status: 200 }
   );
  } catch (error) {
+  console.log(error)
   return NextResponse.json(
    { success: false, msg: "Session id Created failed" },
    { status: 408 }
